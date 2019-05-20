@@ -21,13 +21,13 @@ module.exports = merge(baseConf, {
         open: false,
         inline: true,
         progress: true,
-        quiet: false
+        quiet: true
     },
     devtool: 'inline-source-map',
     plugins: [
-        // new friendlyErrorsWebpackPlugin({
-        //     messages: ['compiled successfully.']
-        // }),
+        new friendlyErrorsWebpackPlugin({
+            messages: ['compiled successfully.']
+        }),
         new webpack.HotModuleReplacementPlugin()
     ]
 })

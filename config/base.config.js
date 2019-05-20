@@ -1,9 +1,11 @@
 const path = require('path')
+const fs = require('fs')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const babelOptions = require('./babel.config')()
 const qcConfig = require(path.resolve(process.cwd(), './qc.config.json'))
+let topNodeModules = fs.existsSync(path.resolve(__dirname, '../node_modules')) ? path.resolve(__dirname, '../node_modules') : path.resolve(__dirname, '../../../../node_modules')
 
 module.exports = {
     entry: {
@@ -74,7 +76,7 @@ module.exports = {
         alias: {
             '@': path.join(process.cwd(), './src')
         },
-        modules: [path.resolve(__dirname, '../node_modules'), path.resolve(process.cwd(), './node_modules')]
+        modules: [topNodeModules, path.resolve(process.cwd(), './node_modules')]
     },
     externals: {
         'vue': 'Vue'
