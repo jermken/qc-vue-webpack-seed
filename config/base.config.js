@@ -11,12 +11,12 @@ let pageList = fs.readdirSync(path.join(process.cwd(), './src/entry')) || []
 let entryConfig = {}
 let htmlList = []
 pageList.forEach((item) => {
-    entryConfig[item] = path.join(process.cwd(), `./src/entry/${item}/index.js`)
+    entryConfig[item] = path.join(process.cwd(), `./src/entry/${item}/${item}.js`)
     htmlList.push(
         new htmlWebpackPlugin({
             title: qcConfig.title,
             filename: `./${item}.html`,
-            template: path.resolve(process.cwd(), `./src/entry/${item}/index.html`),
+            template: path.resolve(process.cwd(), `./src/entry/${item}/${item}.html`),
             chunks: [item],
             env: process.env.NODE_ENV,
             inject: process.env.NODE_ENV === 'development'? false : true,
