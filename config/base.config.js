@@ -7,9 +7,29 @@ const babelOptions = require('./babel.config')()
 const qcConfig = require(path.resolve(process.cwd(), './qc.config.json'))
 let topNodeModules = fs.existsSync(path.resolve(__dirname, '../node_modules')) ? path.resolve(__dirname, '../node_modules') : path.resolve(__dirname, '../../../../node_modules')
 
+let pageList = fs.readdirSync(path.join(process.cwd(), './src/entry')) || []
+let entryConfig = {}
+let htmlList = []
+pageList.forEach((item) => {
+    entryConfig[item] = path.join(process.cwd(), `./src/entry/${item}/index.js`)
+    htmlList.push(
+        new htmlWebpackPlugin({
+            title: qcConfig.title,
+            filename: `./${item}.html`,
+            template: path.resolve(process.cwd(), `./src/entry/${item}/index.html`),
+            chunks: [item],
+            env: process.env.NODE_ENV,
+            inject: process.env.NODE_ENV === 'development'? false : true,
+            favicon: path.resolve(process.cwd(), `./src/entry/${item}/favicon.ico`),
+            meta: {
+                viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+            }
+        })
+    )
+})
 module.exports = {
     entry: {
-        index: path.join(process.cwd(), './src/entry/index.js')
+        ...entryConfig
     },
     output: {
         chunkFilename: 'js/[name].bundle.[hash:8].js'
@@ -58,18 +78,7 @@ module.exports = {
     },
     plugins:[
         new VueLoaderPlugin(),
-        new htmlWebpackPlugin({
-            title: qcConfig.title,
-            filename: './index.html',
-            template: path.resolve(process.cwd(), './src/entry/index.html'),
-            chunks: ['index'],
-            env: process.env.NODE_ENV,
-            inject: process.env.NODE_ENV === 'development'? false : true,
-            favicon: path.resolve(process.cwd(), './src/entry/favicon.ico'),
-            meta: {
-                viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
-            }
-        })
+        ...htmlList
     ],
     resolve: {
         extensions: ['.vue', '.js'],

@@ -10,7 +10,7 @@ module.exports = merge(baseConf, {
     mode: process.env.NODE_ENV || 'production',
     output: {
         path: path.join(process.cwd(), './dist'),
-        filename: 'js/index.[hash:8].js'
+        filename: 'js/[name].[hash:8].js'
     },
     module: {
 
