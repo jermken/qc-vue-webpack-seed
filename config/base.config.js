@@ -10,17 +10,19 @@ let topNodeModules = fs.existsSync(path.resolve(__dirname, '../node_modules')) ?
 let pageList = fs.readdirSync(path.join(process.cwd(), './src/entry')) || []
 let entryConfig = {}
 let htmlList = []
+pageList = pageList.filter((item) => {
+    return fs.statSync(path.join(process.cwd(), './src/entry', `./${item}`)).isDirectory()
+})
 pageList.forEach((item) => {
     entryConfig[item] = path.join(process.cwd(), `./src/entry/${item}/${item}.js`)
     htmlList.push(
         new htmlWebpackPlugin({
-            title: qcConfig.title,
             filename: `./${item}.html`,
             template: path.resolve(process.cwd(), `./src/entry/${item}/${item}.html`),
             chunks: [item],
             env: process.env.NODE_ENV,
             inject: process.env.NODE_ENV === 'development'? false : true,
-            favicon: path.resolve(process.cwd(), `./src/entry/${item}/favicon.ico`),
+            favicon: path.resolve(process.cwd(), `./src/entry/favicon.ico`),
             meta: {
                 viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
             }
