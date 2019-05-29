@@ -4,8 +4,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const babelOptions = require('./babel.config')()
-const qcConfig = require(path.resolve(process.cwd(), './qc.config.json'))
-let topNodeModules = fs.existsSync(path.resolve(__dirname, '../node_modules')) ? path.resolve(__dirname, '../node_modules') : path.resolve(__dirname, '../../../../node_modules')
+let topNodeModules = path.resolve(__dirname, '../../../../node_modules')
 
 let pageList = fs.readdirSync(path.join(process.cwd(), './src/entry')) || []
 let entryConfig = {}
