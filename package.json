@@ -1,6 +1,6 @@
 {
   "name": "@jermken/qc-vue-webpack-seed",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "this is a seed for vue-webpack project",
   "main": "./index.js",
   "scripts": {
