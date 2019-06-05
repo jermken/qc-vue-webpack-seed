@@ -5,7 +5,6 @@ const htmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const babelOptions = require('./babel.config')()
 let topNodeModules = fs.existsSync(path.resolve(__dirname, '../node_modules')) && fs.existsSync(path.resolve(__dirname, '../node_modules/webpack')) ? path.resolve(__dirname, '../node_modules') : path.resolve(__dirname, '../../../../node_modules')
-
 let pageList = fs.readdirSync(path.join(process.cwd(), './src/entry')) || []
 let entryConfig = {}
 let htmlList = []
@@ -23,7 +22,7 @@ pageList.forEach((item) => {
             inject: process.env.NODE_ENV === 'development'? false : true,
             favicon: path.resolve(process.cwd(), `./src/entry/favicon.ico`),
             meta: {
-                viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+                viewport: 'width=device-width; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalabel=no;'
             }
         })
     )

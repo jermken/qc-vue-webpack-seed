@@ -3,17 +3,10 @@ const ora = require('ora')
 const webpack = require('webpack')
 const ProgressPlugin = require('webpack/lib/ProgressPlugin')
 const merge = require('webpack-merge')
-const fs = require('fs')
 const path = require('path')
+const qcConfig = require(path.resolve(process.cwd(), './config.js'))
 
-let webpackOptions
-let destConfigPath = path.resolve(process.cwd(), './config.prod.js')
-
-if(fs.existsSync(destConfigPath)) {
-    webpackOptions = merge(require('../config/prod.config'), require(destConfigPath))
-} else {
-    webpackOptions = require('../config/prod.config')
-}
+let webpackOptions = merge(require('../config/prod.config'), qcConfig.prod || {})
 
 module.exports = function() {
     const compiler = webpack(webpackOptions)

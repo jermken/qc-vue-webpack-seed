@@ -3,18 +3,10 @@ const merge = require('webpack-merge')
 const WebpackServer = require('webpack-dev-server')
 const open = require('open')
 const url = require('url')
-const fs = require('fs')
 const path = require('path')
-const qcConfig = require(path.resolve(process.cwd(), './qc.config.json'))
+const qcConfig = require(path.resolve(process.cwd(), './config.js'))
 
-let webpackOptions
-let destConfigPath = path.resolve(process.cwd(), './config.dev.js')
-
-if(fs.existsSync(destConfigPath)) {
-    webpackOptions = merge(require('../config/dev.config'), require(destConfigPath))
-} else {
-    webpackOptions = require('../config/dev.config')
-}
+let webpackOptions = merge(require('../config/dev.config'), qcConfig.dev || {})
 
 module.exports = function() {
     const compiler = webpack(webpackOptions)

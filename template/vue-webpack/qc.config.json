@@ -1,5 +1,0 @@
-{
-    "lib": "vue",
-    "packer": "webpack",
-    "openPage": "index"
-}
