@@ -6,11 +6,11 @@ const url = require('url')
 const path = require('path')
 const qcConfig = require(path.resolve(process.cwd(), './config.js'))
 
-let webpackOptions = merge(require('../config/dev.config'), qcConfig.dev || {})
-
-module.exports = function() {
+module.exports = function(options) {
+    const webpackOptions = merge(require('../config/dev.config')(options), qcConfig.dev || {})
     const compiler = webpack(webpackOptions)
-    const server = new WebpackServer(compiler, {...webpackOptions.devServer})
+    const server = new WebpackServer(compiler, {...webpackOptions.devServer, quiet: options.silent})
+
     let { port, host, protocol } = webpackOptions.devServer
     let openPage = qcConfig.openPage || 'index'
     port = port || 8080
@@ -22,6 +22,7 @@ module.exports = function() {
         port,
         pathname: `${openPage}.html`
     })
+
     server.listen(port, host, () => {
         open(uri)
     })

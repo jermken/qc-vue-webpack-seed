@@ -3,8 +3,9 @@ const merge = require('webpack-merge')
 const webpack = require('webpack')
 const friendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const baseConf = require('./base.config.js')
+let plugins = [new webpack.HotModuleReplacementPlugin()]
 
-module.exports = merge(baseConf, {
+module.exports = (options) => merge(baseConf, {
     mode: process.env.NODE_ENV || 'development',
     output: {
         path: path.join(process.cwd(), './dist'),
@@ -21,13 +22,12 @@ module.exports = merge(baseConf, {
         open: false,
         inline: true,
         progress: true,
-        quiet: false
+        quiet: options.silent || false
     },
     devtool: 'inline-source-map',
-    plugins: [
-        // new friendlyErrorsWebpackPlugin({
-        //     messages: ['compiled successfully.']
-        // }),
-        new webpack.HotModuleReplacementPlugin()
-    ]
+    plugins: options.silent ? plugins.concat(
+            [new friendlyErrorsWebpackPlugin({messages: ['compiled successfully.']})]
+        )
+        :
+        plugins
 })

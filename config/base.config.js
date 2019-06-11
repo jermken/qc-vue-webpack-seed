@@ -37,7 +37,7 @@ module.exports = {
         ...entryConfig
     },
     output: {
-        chunkFilename: 'js/[name].bundle.[hash:8].js'
+        chunkFilename: 'js/[name].chunk.[hash:6].js'
     },
     module: {
         rules: [
@@ -96,8 +96,5 @@ module.exports = {
             '@': path.join(process.cwd(), './src')
         },
         modules: [topNodeModules, path.resolve(process.cwd(), './node_modules')]
-    },
-    externals: {
-        'vue': 'Vue'
     }
 }

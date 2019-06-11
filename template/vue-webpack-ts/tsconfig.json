@@ -5,7 +5,7 @@
         "strict": true,
         "moduleResolution": "node",
         "noImplicitAny": true,
-        "removeComments": true,
+        "removeComments": false,
         "preserveConstEnums": true,
         "sourceMap": false,
         "allowJs": true,
@@ -17,9 +17,7 @@
             "es2015.promise"],
         "baseUrl": ".",
         "paths": {
-            "@/*": ["./src/*"],
-            "~@/*": ["./src/components/*"],
-            "~lib@/*": ["/src/js/lib/*"]
+            "@/*": ["./src/*"]
         }
     },
     "include": [
