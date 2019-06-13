@@ -1,7 +1,7 @@
 {
-  "name": "@jermken/qc-vue-webpack-seed",
-  "version": "0.2.9",
-  "description": "this is a seed for vue-webpack project",
+  "name": "@jermken/qc-webpack-seed",
+  "version": "0.1.0",
+  "description": "this is a seed for webpack project",
   "main": "./index.js",
   "scripts": {
     "v-l": "npm version major",
@@ -12,10 +12,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jermken/qc-vue-webpack-seed.git"
+    "url": "git+https://github.com/jermken/qc-webpack-seed.git"
   },
   "bin": {
-    "qc-vue-webpack-seed": "bin/qc-vue-webpack-seed"
+    "qc-webpack-seed": "bin/qc-webpack-seed"
   },
   "dependencies": {
     "@babel/core": "^7.4.4",
@@ -68,6 +68,7 @@
   },
   "keywords": [
     "vue",
+    "react",
     "webpack",
     "qc",
     "qc-cli",
@@ -76,7 +77,7 @@
   "author": "jermken",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jermken/qc-vue-webpack-seed/issues"
+    "url": "https://github.com/jermken/qc-webpack-seed/issues"
   },
-  "homepage": "https://github.com/jermken/qc-vue-webpack-seed#readme"
+  "homepage": "https://github.com/jermken/qc-webpack-seed#readme"
 }
