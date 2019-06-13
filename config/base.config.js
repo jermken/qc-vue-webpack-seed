@@ -46,7 +46,7 @@ module.exports = {
                 loader: require.resolve('vue-loader')
             },
             {
-                test: /\.js$/,
+                test: /\.j(s|sx)$/,
                 exclude: /node_modules/,
                 include: [path.join(process.cwd(), './src')],
                 use: {
@@ -91,7 +91,7 @@ module.exports = {
         ...htmlList
     ],
     resolve: {
-        extensions: ['.js', '.ts', '.vue', '.tsx', '.json'],
+        extensions: ['.js', '.ts', '.vue', '.tsx', 'jsx', '.json'],
         alias: {
             '@': path.join(process.cwd(), './src')
         },

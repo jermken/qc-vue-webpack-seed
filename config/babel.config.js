@@ -15,6 +15,7 @@ module.exports = () => ({
             require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
             [require.resolve('@babel/plugin-proposal-pipeline-operator'), { proposal: 'minimal' }],
             require.resolve('@babel/plugin-syntax-dynamic-import'),
+            require.resolve('@babel/plugin-transform-react-jsx'),
             [require.resolve('@babel/plugin-transform-runtime'), { corejs: 2 }]
     ]
 })
