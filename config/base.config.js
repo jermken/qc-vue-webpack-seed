@@ -5,7 +5,7 @@ const htmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const babelOptions = require('./babel.config')()
 const qcConfig = require(path.resolve(process.cwd(), './config.js'))
-let topNodeModules = fs.existsSync(path.resolve(__dirname, '../node_modules')) && fs.existsSync(path.resolve(__dirname, '../node_modules/webpack')) ? path.resolve(__dirname, '../node_modules') : path.resolve(__dirname, '../../../../node_modules')
+// let topNodeModules = fs.existsSync(path.resolve(__dirname, '../node_modules')) && fs.existsSync(path.resolve(__dirname, '../node_modules/webpack')) ? path.resolve(__dirname, '../node_modules') : path.resolve(__dirname, '../../../../node_modules')
 let pageList = fs.readdirSync(path.join(process.cwd(), './src/entry')) || []
 let entryConfig = {}
 let htmlList = []
@@ -108,6 +108,7 @@ module.exports = {
         alias: {
             '@': path.join(process.cwd(), './src')
         },
-        modules: [topNodeModules, path.resolve(process.cwd(), './node_modules')]
+        // modules: [topNodeModules, path.resolve(process.cwd(), './node_modules')]
+        modules: [path.resolve(process.cwd(), './node_modules'), path.resolve(__dirname, '../node_modules'), path.resolve(__dirname, '../../../../node_modules')]
     }
 }
