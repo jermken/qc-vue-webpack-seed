@@ -1,6 +1,6 @@
 {
   "name": "@jermken/qc-webpack-seed",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "this is a seed for webpack project",
   "main": "./index.js",
   "scripts": {
