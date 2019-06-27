@@ -73,7 +73,8 @@
     "webpack",
     "qc",
     "qc-cli",
-    "spa"
+    "spa",
+    "mpa"
   ],
   "author": "jermken",
   "license": "ISC",

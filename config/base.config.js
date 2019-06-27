@@ -3,9 +3,10 @@ const fs = require('fs')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { CreatePlugin } = require('../lib/util/index.js')
 const babelOptions = require('./babel.config')()
 const qcConfig = require(path.resolve(process.cwd(), './config.js'))
-// let topNodeModules = fs.existsSync(path.resolve(__dirname, '../node_modules')) && fs.existsSync(path.resolve(__dirname, '../node_modules/webpack')) ? path.resolve(__dirname, '../node_modules') : path.resolve(__dirname, '../../../../node_modules')
+
 let pageList = fs.readdirSync(path.join(process.cwd(), './src/entry')) || []
 let entryConfig = {}
 let htmlList = []
@@ -89,7 +90,8 @@ pageList.forEach((item) => {
         })
     )
 })
-module.exports = {
+
+let webpackConfig = {
     entry: {
         ...entryConfig
     },
@@ -108,7 +110,15 @@ module.exports = {
         alias: {
             '@': path.join(process.cwd(), './src')
         },
-        // modules: [topNodeModules, path.resolve(process.cwd(), './node_modules')]
         modules: [path.resolve(process.cwd(), './node_modules'), path.resolve(__dirname, '../node_modules'), path.resolve(__dirname, '../../../../node_modules')]
     }
 }
+
+if(qcConfig.beforeRun && typeof qcConfig.beforeRun === 'function') {
+    webpackConfig.plugins.push(new CreatePlugin('beforeRun', qcConfig.beforeRun))
+}
+if(qcConfig.afterRun && typeof qcConfig.afterRun === 'function') {
+    webpackConfig.plugins.push(new CreatePlugin('done', qcConfig.afterRun))
+}
+
+module.exports = webpackConfig
