@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-module.exports = merge(baseConf, {
+module.exports = (option) => merge(baseConf, {
     mode: process.env.NODE_ENV || 'production',
     output: {
         path: path.join(process.cwd(), './dist'),
@@ -23,7 +23,7 @@ module.exports = merge(baseConf, {
         })
     ],
     optimization: {
-        minimizer: [
+        minimizer: !option.uglify? [] : [
             new UglifyJsPlugin({
                 cache: true,
                 parallel: true,

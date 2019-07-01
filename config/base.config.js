@@ -27,7 +27,7 @@ let ruleList = [
     {
         test: /\.(sc|c)ss$/,
         use: [
-            process.env.NODE_ENV !== 'production' ? require.resolve('vue-style-loader') : {
+            process.env.NODE_ENV !== 'production' ? (qcConfig.lib === 'vue' ? require.resolve('vue-style-loader') : require.resolve('style-loader')) : {
                 loader: MiniCssExtractPlugin.loader,
                 options: {
                     publicPath: path.join(process.cwd(), '../')
@@ -84,6 +84,10 @@ pageList.forEach((item) => {
             env: process.env.NODE_ENV,
             inject: process.env.NODE_ENV === 'development'? false : true,
             favicon: path.resolve(process.cwd(), `./src/entry/favicon.ico`),
+            minify: {
+                collapseWhitespace:true,
+                removeComments: true
+            },
             meta: {
                 viewport: 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1'
             }

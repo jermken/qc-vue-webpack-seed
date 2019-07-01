@@ -6,11 +6,11 @@ const merge = require('webpack-merge')
 const path = require('path')
 const qcConfig = require(path.resolve(process.cwd(), './config.js'))
 
-let webpackOptions = merge(require('../config/prod.config'), qcConfig.prod || {})
-
-module.exports = function() {
+module.exports = function(option) {
+    const webpackOptions = merge(require('../config/prod.config')(option), qcConfig.prod || {})
     const compiler = webpack(webpackOptions)
     let spinner = ora('')
+
     spinner.start();
     (new ProgressPlugin((percentage) => {
         spinner.text = `compiling... ${(percentage * 100).toFixed(0)}%`
